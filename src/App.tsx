@@ -13,6 +13,7 @@ import Cart from "./pages/Cart";
 import About from "./pages/About";
 import HumanJetWings from "./pages/HumanJetWings";
 import Military from "./pages/Military";
+import Contact from "./pages/Contact";
 import { useState } from "react";
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/human-jet-wings" element={<HumanJetWings />} />
             <Route path="/military" element={<Military />} />
+            <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
