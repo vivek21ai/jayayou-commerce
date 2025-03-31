@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Search } from 'lucide-react';
 
 interface ProductFiltersProps {
   onFilterChange: (filters: any) => void;
@@ -84,7 +85,7 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm border">
+    <div className="glass-card p-4 rounded-lg border border-white/10 hover-lift">
       <div className="mb-6">
         <div className="relative">
           <Input
@@ -92,14 +93,15 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
             placeholder="Search products..."
             value={filters.searchTerm}
             onChange={handleSearchChange}
-            className="pr-10"
+            className="pr-10 bg-black/20 border-white/20 text-white placeholder:text-gray-400"
           />
+          <Search className="absolute right-3 top-2.5 text-gray-400" size={18} />
         </div>
       </div>
 
       <Accordion type="multiple" defaultValue={["price", "category", "availability"]} className="space-y-4">
-        <AccordionItem value="price" className="border-b">
-          <AccordionTrigger className="text-base font-medium">Price Range</AccordionTrigger>
+        <AccordionItem value="price" className="border-b border-white/10">
+          <AccordionTrigger className="text-base font-medium text-jatayu-accent">Price Range</AccordionTrigger>
           <AccordionContent className="pt-4">
             <div className="space-y-4">
               <Slider
@@ -111,7 +113,7 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
                 onValueChange={handlePriceChange}
                 className="my-6"
               />
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm text-gray-300">
                 <span>${filters.priceRange[0].toLocaleString()}</span>
                 <span>${filters.priceRange[1].toLocaleString()}</span>
               </div>
@@ -119,8 +121,8 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="category" className="border-b">
-          <AccordionTrigger className="text-base font-medium">Categories</AccordionTrigger>
+        <AccordionItem value="category" className="border-b border-white/10">
+          <AccordionTrigger className="text-base font-medium text-jatayu-accent">Categories</AccordionTrigger>
           <AccordionContent className="pt-4">
             <div className="space-y-2">
               {categories.map((category) => (
@@ -134,7 +136,7 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
                   />
                   <Label
                     htmlFor={`category-${category}`}
-                    className="text-sm font-normal capitalize"
+                    className="text-sm font-normal capitalize text-gray-300"
                   >
                     {category.replace('-', ' ')}
                   </Label>
@@ -144,8 +146,8 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="availability" className="border-b">
-          <AccordionTrigger className="text-base font-medium">Availability</AccordionTrigger>
+        <AccordionItem value="availability" className="border-b border-white/10">
+          <AccordionTrigger className="text-base font-medium text-jatayu-accent">Availability</AccordionTrigger>
           <AccordionContent className="pt-4">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
@@ -158,7 +160,7 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
                 />
                 <Label
                   htmlFor="availability-inStock"
-                  className="text-sm font-normal"
+                  className="text-sm font-normal text-gray-300"
                 >
                   In Stock
                 </Label>
@@ -173,7 +175,7 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
                 />
                 <Label
                   htmlFor="availability-restricted"
-                  className="text-sm font-normal"
+                  className="text-sm font-normal text-gray-300"
                 >
                   Show Restricted Items
                 </Label>
@@ -185,14 +187,14 @@ const ProductFilters = ({ onFilterChange, minPrice, maxPrice, categories }: Prod
 
       <div className="flex gap-2 mt-6">
         <Button
-          className="flex-1 bg-jatayu-primary hover:bg-jatayu-primary/90"
+          className="flex-1 bg-jatayu-accent hover:bg-jatayu-accent/90"
           onClick={handleApplyFilters}
         >
           Apply Filters
         </Button>
         <Button
           variant="outline"
-          className="flex-1"
+          className="flex-1 border-white/20"
           onClick={handleResetFilters}
         >
           Reset

@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ProductCard, { Product } from '@/components/products/ProductCard';
@@ -134,40 +135,99 @@ const ProductsPage = () => {
     setFilters(newFilters);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-jatayu-dark text-white overflow-hidden">
       <Header />
-      <main className="flex-grow bg-gray-50">
-        <div className="container mx-auto px-6 py-8">
-          <h1 className="text-3xl font-bold text-jatayu-primary mb-2">Our Products</h1>
-          <p className="text-gray-600 mb-8 max-w-3xl">
-            Explore our range of cutting-edge jet engines, from experimental prototypes to military-grade propulsion systems.
-          </p>
+      <main className="flex-grow relative">
+        {/* Futuristic background elements */}
+        <div className="fixed inset-0 z-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,#1C77C3_0%,transparent_50%)] opacity-10"></div>
+          <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,#FF6B35_0%,transparent_50%)] opacity-10"></div>
+          <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-jatayu-secondary rounded-full filter blur-[100px] opacity-5 animate-pulse-slow"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-jatayu-accent rounded-full filter blur-[120px] opacity-5 animate-pulse-slow"></div>
+        </div>
+
+        <div className="container mx-auto px-6 py-8 relative z-10">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold text-gradient mb-2"
+          >
+            Cutting-Edge Propulsion
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-gray-300 mb-8 max-w-3xl"
+          >
+            Explore our range of revolutionary jet engines, from experimental prototypes to military-grade propulsion systems.
+          </motion.p>
           
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-1">
-              <ProductFilters 
-                onFilterChange={handleFilterChange}
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                categories={categories}
-              />
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ProductFilters 
+                  onFilterChange={handleFilterChange}
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+                  categories={categories}
+                />
+              </motion.div>
             </div>
             
             <div className="lg:col-span-3">
               {filteredProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center bg-white rounded-lg shadow-sm p-12">
-                  <h2 className="text-2xl font-bold text-jatayu-primary mb-2">No products found</h2>
-                  <p className="text-gray-600 mb-4 text-center">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex flex-col items-center justify-center glass-card p-12"
+                >
+                  <h2 className="text-2xl font-bold text-jatayu-accent mb-2">No products found</h2>
+                  <p className="text-gray-300 mb-4 text-center">
                     Try adjusting your filters or search criteria.
                   </p>
-                </div>
+                </motion.div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <motion.div 
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
                   {filteredProducts.map(product => (
-                    <ProductCard key={product.id} product={product} />
+                    <motion.div key={product.id} variants={itemVariants}>
+                      <ProductCard product={product} />
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               )}
             </div>
           </div>

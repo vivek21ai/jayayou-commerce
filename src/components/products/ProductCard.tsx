@@ -44,8 +44,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg h-full flex flex-col">
-      <Link to={`/products/${id}`} className="flex flex-col h-full">
+    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg h-full flex flex-col bg-black/40 backdrop-blur-md border border-white/10">
+      <div className="flex flex-col h-full">
         <div className="relative h-48 overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center transition-transform duration-500 hover:scale-105" 
@@ -68,18 +68,16 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
         <CardContent className="py-4 flex-grow">
-          <h3 className="font-semibold text-lg text-jatayu-primary mb-1">{name}</h3>
-          <p className="text-gray-600 text-sm line-clamp-2 mb-2">{description}</p>
+          <h3 className="font-semibold text-lg text-jatayu-accent mb-1">{name}</h3>
+          <p className="text-gray-300 text-sm line-clamp-2 mb-2">{description}</p>
           <p className="text-jatayu-secondary font-bold text-lg">${price.toLocaleString()}</p>
         </CardContent>
         <CardFooter className="pt-0 pb-4 px-4 gap-2">
           <Button 
             className="w-full bg-jatayu-primary hover:bg-jatayu-primary/90"
-            asChild
+            onClick={() => window.location.href = `/products/${id}`}
           >
-            <Link to={`/products/${id}`}>
-              View Details
-            </Link>
+            View Details
           </Button>
           <Button 
             className="bg-jatayu-accent hover:bg-jatayu-accent/90 p-2" 
@@ -90,7 +88,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <ShoppingCart size={20} />
           </Button>
         </CardFooter>
-      </Link>
+      </div>
     </Card>
   );
 };
