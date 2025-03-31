@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { ArrowRight, Shield, Zap, Lock, FileCheck, Activity, Helicopter, Send } from 'lucide-react';
+import { ArrowRight, Shield, Zap, Lock, FileCheck, Activity, Plane, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -99,7 +98,7 @@ const Military = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-jatayu-accent/20 to-jatayu-secondary/20 rounded-lg blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
                 <div className="relative bg-black/40 backdrop-blur-sm border border-white/10 p-8 rounded-lg h-full flex flex-col transition-transform hover:-translate-y-1 duration-300">
                   <div className="bg-jatayu-accent/10 text-jatayu-accent p-3 rounded-full w-14 h-14 flex items-center justify-center mb-6">
-                    <Helicopter size={24} />
+                    <Plane size={24} />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">TJ-9000 Combat Engines</h3>
                   <p className="text-gray-400 mb-4">
